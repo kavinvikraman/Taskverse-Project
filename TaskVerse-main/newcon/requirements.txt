@@ -1,0 +1,10 @@
+flask
+Werkzeug
+python-docx
+docx2txt
+PyMuPDF
+python-pptx
+fpdf
+Pillow
+pdfkit
+reportlab
