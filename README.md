@@ -253,7 +253,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 **Kavin Vikraman**
 
 - GitHub: [@kavinvikraman](https://github.com/kavinvikraman)
-- Email: [contact@taskverse.dev](mailto:contact@taskverse.dev)
 
 ---
 
@@ -269,7 +268,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 Need help? We're here for you!
 
-- 📧 Email: support@taskverse.dev
 - 💬 Discussions: [GitHub Discussions](https://github.com/kavinvikraman/Taskverse-Project/discussions)
 - 🐛 Bug Reports: [GitHub Issues](https://github.com/kavinvikraman/Taskverse-Project/issues)
 - 📖 Documentation: [Wiki](https://github.com/kavinvikraman/Taskverse-Project/wiki)
