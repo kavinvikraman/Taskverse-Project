@@ -31,11 +31,34 @@ User = get_user_model()
 
 class LoginView(APIView):
     def post(self, request):
-        username_or_email = request.data.get('username')
-        password = request.data.get('password')
-        user = authenticate(request, username=username_or_email, password=password)
+        username_or_email = request.data.get('username', '')
+        password = request.data.get('password', '')
+        
+        logger.info(f"Login attempt for: {username_or_email}")
+        
+        if not username_or_email or not password:
+            return Response({'detail': 'Username and password are required'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        # Try to find user by email first if input looks like an email
+        user = None
+        if '@' in username_or_email:
+            try:
+                user_obj = User.objects.get(email=username_or_email)
+                logger.info(f"Found user by email: {user_obj.username}")
+                user = authenticate(request, username=user_obj.username, password=password)
+            except User.DoesNotExist:
+                logger.info(f"No user found with email: {username_or_email}")
+        
+        # If not found by email, try username
         if user is None:
+            logger.info(f"Trying username authentication for: {username_or_email}")
+            user = authenticate(request, username=username_or_email, password=password)
+        
+        if user is None:
+            logger.warning(f"Authentication failed for: {username_or_email}")
             return Response({'detail': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
+        
+        logger.info(f"Login successful for: {user.username}")
         refresh = RefreshToken.for_user(user)
         return Response({
             'access': str(refresh.access_token),
